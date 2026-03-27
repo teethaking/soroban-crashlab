@@ -55,6 +55,9 @@ pub use corpus::{
     CORPUS_ARCHIVE_SCHEMA_VERSION,
 };
 
+pub mod retention;
+pub use retention::RetentionPolicy;
+
 pub mod scenario_export;
 pub use scenario_export::{FailureScenario, export_scenario_json};
 
