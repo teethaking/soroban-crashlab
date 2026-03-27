@@ -8,6 +8,7 @@ import RunHistoryTableSkeleton from './RunHistoryTableSkeleton';
 import Pagination from './Pagination';
 import CrashDetailDrawer from './CrashDetailDrawer';
 import { FuzzingRun, RunStatus } from './types';
+import CrossRunBoardWidgets from './implement-cross-run-board-widgets-component';
 
 // Mock data for demonstration
 const MOCK_RUNS: FuzzingRun[] = Array.from({ length: 25 }, (_, i) => ({
@@ -316,6 +317,10 @@ function HomeContent() {
 
   return (
     <div className="flex flex-col items-center justify-center py-20 px-8 max-w-5xl mx-auto w-full">
+      {/* Cross-run board widgets section */}
+      <div className="w-full mb-12">
+        <CrossRunBoardWidgets />
+      </div>
       <div className="text-center max-w-3xl mb-16">
         <h1 className="text-5xl font-bold tracking-tight mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Bulletproof Your Soroban Smart Contracts
