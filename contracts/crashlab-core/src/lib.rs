@@ -81,6 +81,9 @@ pub use container_stress::{
 pub mod crash_index;
 pub use crash_index::{CrashGroup, CrashGroupRecord, CrashIndex, CrashIndexSummary};
 
+pub mod mutation_budget;
+pub use mutation_budget::{BudgetReport, MutationBudget};
+
 pub mod run_control;
 pub use run_control::{
     CancelSignal, RunId, RunSummary, RunTerminalState, cancel_marker_path, cancel_requested,
