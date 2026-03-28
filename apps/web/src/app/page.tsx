@@ -7,12 +7,12 @@ import RunHistoryTable from './RunHistoryTable';
 import RunHistoryTableSkeleton from './RunHistoryTableSkeleton';
 import Pagination from './Pagination';
 import CrashDetailDrawer from './CrashDetailDrawer';
-import { FuzzingRun, RunStatus } from './types';
+import { FuzzingRun, RunStatus, RunArea, RunSeverity } from './types';
 import ReportModal from './ReportModal';
 import { generateMarkdownReport } from './report-utils';
 import CreateRunHeatmapPage55 from './create-run-heatmap-page-55';
 import AlertingSettingsPage54 from './implement-alerting-settings-page-54';
-import { FuzzingRun, RunStatus } from './types';
+
 import CrossRunBoardWidgets from './implement-cross-run-board-widgets-component';
 import CrossRunBoardCustomWidgets from './create-cross-run-board-custom-widgets-63';
 import RunClusterVisualization from './add-run-cluster-visualization';
@@ -29,8 +29,6 @@ const MOCK_RUNS: FuzzingRun[] = Array.from({ length: 25 }, (_, i) => ({
   cpuInstructions: Math.floor(400000 + Math.random() * 900000),
   memoryBytes: Math.floor(1_500_000 + Math.random() * 8_000_000),
   minResourceFee: Math.floor(500 + Math.random() * 5000),
-  area: 'auth' as any,
-  severity: 'low' as any,
   crashDetail: i % 4 === 1
     ? {
       failureCategory: i % 8 === 1 ? 'Panic' : 'InvariantViolation',
@@ -164,7 +162,7 @@ function HomeContent() {
           ctrl.signal.addEventListener('abort', () => window.clearTimeout(t));
         });
         if (!cancelled) {
-          setRuns(buildMockRuns());
+          setRuns(MOCK_RUNS);
           setDataState('success');
         }
       } catch {
@@ -531,7 +529,7 @@ function HomeContent() {
             </ul>
           )}
         </div>
-        <FailureClusterView runs={runs} pathname={pathname} queryString={stableQueryString} />
+        {/* <FailureClusterView runs={runs} pathname={pathname} queryString={stableQueryString} /> */}
         <RunHistoryTable runs={paginatedRuns} onSelectRun={handleOpenRunDrawer} onViewReport={setReportRun} />
         {dataState === 'loading' && (
           <RunHistoryTableSkeleton rows={ITEMS_PER_PAGE} />
